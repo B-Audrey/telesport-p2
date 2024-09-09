@@ -1,1 +1,10 @@
-<h2>Olympic games app WORKS</h2>
+@if (olympicData$ | async) {
+    <div class="header">
+        <app-title title="Medals per Country"></app-title>
+    </div>
+    <div class="infos">
+        <app-number-bloc text="Number of JOs" number="10"></app-number-bloc>
+        <app-number-bloc text="Number of counires" number="10"></app-number-bloc>
+    </div>
+
+}

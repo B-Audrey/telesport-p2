@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  box-sizing: border-box;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid  var(--main-color);
+  border-radius: 8px;
+  padding: 5px 10px;
+  & span {
+    text-align: center;
+  }
+  & .number {
+    font-weight: bold;
+  }
+}
