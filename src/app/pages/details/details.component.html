@@ -1,1 +1,12 @@
-<p>details works!</p>
+<div class="header">
+  <app-title [title]="olympic ? olympic.country : ''"></app-title>
+</div>
+<div class="infos">
+  <app-number-bloc
+    text="Number of entries"
+    [number]="olympic ? olympic.participations.length.toString() : 'non-défini'"></app-number-bloc>
+  <app-number-bloc text="Total number medals" [number]="totalMedals.toString()"></app-number-bloc>
+  <app-number-bloc
+    text="Total number of Athletes"
+    [number]="totalAthletes.toString()"></app-number-bloc>
+</div>

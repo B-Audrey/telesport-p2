@@ -21,7 +21,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'details/:uuid',
+        path: 'details/:id',
         loadComponent: () =>
           import('../pages/details/details.component').then(
             ({ DetailsComponent }) => DetailsComponent,
