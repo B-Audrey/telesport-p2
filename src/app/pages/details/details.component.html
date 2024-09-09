@@ -1,3 +1,9 @@
+@if(isLoading()) {
+    <app-loader></app-loader>
+}
+@if(errorMessage.length > 1) {
+    <div>{{errorMessage}}</div>
+}
 <div class="header">
   <app-title [title]="olympic ? olympic.country : ''"></app-title>
 </div>
