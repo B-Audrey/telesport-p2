@@ -4,10 +4,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgxChartsModule],
+  imports: [BrowserAnimationsModule, BrowserModule, AppRoutingModule, HttpClientModule, NgxChartsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

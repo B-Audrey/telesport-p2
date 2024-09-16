@@ -1,21 +1,37 @@
 @if(isLoading()) {
-    <app-loader></app-loader>
+  <app-loader></app-loader>
 }
 @if(errorMessage.length > 1) {
-    <div>{{errorMessage}}</div>
+  <div>{{errorMessage}}</div>
 }
 
 @if (olympic) {
-<div class="header">
-  <app-title [title]="olympic.country"></app-title>
-</div>
-<div class="infos">
-  <app-number-bloc
-    text="Number of entries"
-    [number]="olympic ? olympic.participations.length.toString() : 'non-défini'"></app-number-bloc>
-  <app-number-bloc text="Total number medals" [number]="totalMedals.toString()"></app-number-bloc>
-  <app-number-bloc
-    text="Total number of Athletes"
-    [number]="totalAthletes.toString()"></app-number-bloc>
-</div>
+  <div class="header">
+    <app-title [title]="olympic.country"></app-title>
+  </div>
+  <div class="infos">
+    <app-number-bloc
+      text="Number of entries"
+      [number]="olympic ? olympic.participations.length.toString() : 'non-défini'"></app-number-bloc>
+    <app-number-bloc text="Total number medals" [number]="totalMedals.toString()"></app-number-bloc>
+    <app-number-bloc
+      text="Total number of Athletes"
+      [number]="totalAthletes.toString()"></app-number-bloc>
+  </div>
+
+  <div class="graph">
+    <ngx-charts-line-chart
+      [legend]="false"
+      [tooltipDisabled]="true"
+      [autoScale]="true"
+      [xAxis]="true"
+      [yAxis]="true"
+      [xAxisLabel]="'Dates'"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [timeline]="false"
+      [animations]="true"
+      [results]="lineChartData">
+    </ngx-charts-line-chart>
+  </div>
 }

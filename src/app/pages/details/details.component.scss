@@ -11,3 +11,15 @@
   align-items: center;
   gap: 2em;
 }
+.graph {
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+::ng-deep g[ngx-charts-axis-label] text {
+  fill: var(--dark-grey);
+  font-size: 1.2em;
+  }
+

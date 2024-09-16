@@ -14,7 +14,7 @@ export class OlympicService {
     return this.http.get<OlympicCountry[]>(this.olympicUrl);
   }
 
-  getOneOlympicCountry(id: string) {
+  getOneOlympicCountry$(id: string) {
     return this.http
       .get<OlympicCountry[]>(this.olympicUrl)
       .pipe(map(data => data.find(country => country.id.toString() === id)));
