@@ -1,9 +1,11 @@
 @if(isLoading()) {
     <app-loader></app-loader>
 }
+
 @if(errorMessage.length > 1) {
     <div>{{errorMessage}}</div>
 }
+
 @if (olympicData$ | async; as olympics) {
   <div class="header">
     <app-title title="Medals per Country"></app-title>

@@ -4,8 +4,10 @@
 @if(errorMessage.length > 1) {
     <div>{{errorMessage}}</div>
 }
+
+@if (olympic) {
 <div class="header">
-  <app-title [title]="olympic ? olympic.country : ''"></app-title>
+  <app-title [title]="olympic.country"></app-title>
 </div>
 <div class="infos">
   <app-number-bloc
@@ -16,3 +18,4 @@
     text="Total number of Athletes"
     [number]="totalAthletes.toString()"></app-number-bloc>
 </div>
+}

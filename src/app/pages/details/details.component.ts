@@ -28,7 +28,6 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading.set(true);
-    console.log(this.isLoading())
     if (this.route.snapshot.params['id']) {
       this.olympicService
         .getOneOlympicCountry(this.route.snapshot.params['id'])

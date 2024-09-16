@@ -4,7 +4,7 @@ import { OlympicService } from '../../shared/services/olympic.service';
 import { NumberBlocComponent } from '../../shared/components/number-bloc/number-bloc.component';
 import { TitleComponent } from '../../shared/components/title/title.component';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
-import {catchError, of, tap} from 'rxjs';
+import {catchError, finalize, of} from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -21,10 +21,11 @@ export class DashboardComponent {
 
   olympicData$ = this.olympicService.getOlympics().pipe(
     catchError((error: HttpErrorResponse) => {
-      this.errorMessage = error.message;
       this.isLoading.set(false);
+      console.warn(error);
+      this.errorMessage = error.message;
       return of(null);
     }),
-      tap(() => this.isLoading.set(false))
+      finalize( () => this.isLoading.set(false) ),
   );
 }
