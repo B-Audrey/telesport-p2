@@ -23,6 +23,10 @@
   font-size: 1.2em;
   }
 
+::ng-deep g.line-chart {
+  width: 100%;
+  margin:auto;
+}
 .go-back-icon {
   position: absolute;
   top: 1em;

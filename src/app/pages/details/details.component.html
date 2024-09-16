@@ -7,6 +7,7 @@
 @if(isLoading()) {
   <app-loader></app-loader>
 }
+
 @if(errorMessage.length > 1) {
   <div>{{errorMessage}}</div>
 }
@@ -27,6 +28,7 @@
 
   <div class="graph">
     <ngx-charts-line-chart
+      [view]="view"
       [legend]="false"
       [tooltipDisabled]="true"
       [autoScale]="true"
@@ -35,7 +37,6 @@
       [xAxisLabel]="'Dates'"
       [showXAxisLabel]="true"
       [showYAxisLabel]="true"
-      [timeline]="false"
       [animations]="true"
       [results]="lineChartData">
     </ngx-charts-line-chart>

@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, OnInit, signal} from '@angular/core';
+import { Component, DestroyRef, HostListener, inject, OnInit, signal } from '@angular/core';
 import { NumberBlocComponent } from '../../shared/components/number-bloc/number-bloc.component';
 import { TitleComponent } from '../../shared/components/title/title.component';
 import { OlympicService } from '../../shared/services/olympic.service';
@@ -9,7 +9,7 @@ import { catchError, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
 import { LineChartModule } from '@swimlane/ngx-charts';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-details',
@@ -35,6 +35,20 @@ export class DetailsComponent implements OnInit {
   totalAthletes: number = 0;
   errorMessage: string = '';
   lineChartData: any[] = [];
+  view: [number, number] = [700, 400];
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.updateViewSize();
+  }
+
+  updateViewSize() {
+    const width = window.innerWidth;
+    const height = window.innerHeight * 0.3;
+    console.log(width)
+    console.log(height)
+    this.view = [width, height];
+  }
 
   ngOnInit(): void {
     this.isLoading.set(true);
@@ -73,6 +87,7 @@ export class DetailsComponent implements OnInit {
           }
           this.isLoading.set(false);
         });
+      this.updateViewSize();
     }
   }
 }

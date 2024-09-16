@@ -8,5 +8,19 @@
 }
 body {
   margin: auto;
-  width: 98%;
+  width:90%;
+  @media(min-width: 768px) {
+    width: unset;
+  }
+}
+
+p, span, a, li {
+  font-size : 0.8em;
+  @media (min-width: 768px) {
+    font-size : 1em;
+  }
+}
+
+h1 {
+  font-size: 2em;
 }

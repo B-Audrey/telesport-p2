@@ -7,7 +7,7 @@ import {LoaderComponent} from '../../shared/components/loader/loader.component';
 import {catchError, finalize, map, of, tap} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {OlympicCountry} from '../../shared/models/Olympic';
-import {PieChartModule} from '@swimlane/ngx-charts';
+import {LineChartModule, PieChartModule} from '@swimlane/ngx-charts';
 import {Router} from '@angular/router';
 
 @Component({
@@ -22,14 +22,15 @@ import {Router} from '@angular/router';
     TitleComponent,
     LoaderComponent,
     PieChartModule,
+    LineChartModule,
   ],
 })
 export class DashboardComponent implements OnInit {
   private olympicService = inject(OlympicService);
-  private router = inject(Router)
+  private router = inject(Router);
   errorMessage: string = '';
   view: [number, number] = [700, 400];
-  countryIdMap = new Map<string, string>();  // name - id
+  countryIdMap = new Map<string, string>(); // name - id
   isLoading = signal(true);
 
   @HostListener('window:resize', ['$event'])
@@ -58,7 +59,6 @@ export class DashboardComponent implements OnInit {
         };
       });
     }),
-    tap(v => console.log(v)),
     finalize(() => this.isLoading.set(false)),
   );
 
@@ -67,12 +67,12 @@ export class DashboardComponent implements OnInit {
   }
 
   updateViewSize() {
-    const width = window.innerWidth * 0.95;
+    const width = window.innerWidth * 0.80;
     const height = window.innerHeight * 0.5;
     this.view = [width, height];
   }
 
-  onCountrySelect($event: { name: string, label: string, value: number }) {
+  onCountrySelect($event: { name: string; label: string; value: number }) {
     const countryId = this.countryIdMap.get($event.name);
     if (countryId) {
       this.router.navigate([`/details/${countryId}`]);
