@@ -1,9 +1,9 @@
-@if(isLoading()) {
-    <app-loader></app-loader>
+@if (isLoading()) {
+  <app-loader></app-loader>
 }
 
-@if(errorMessage.length > 1) {
-    <div>{{errorMessage}}</div>
+@if (errorMessage.length > 1) {
+  <div>{{ errorMessage }}</div>
 }
 
 @if (olympicData$ | async; as olympics) {
@@ -14,10 +14,35 @@
     <app-number-bloc text="Number of JOs" number="10"></app-number-bloc>
     <app-number-bloc
       text="Number of countries"
-      [number]="olympics.length.toString()"></app-number-bloc>
+      [number]="olympics.length.toString()">
+    </app-number-bloc>
+  </div>
+  <div class="graph">
+    <ngx-charts-pie-chart
+      [results]="olympics"
+      [labels]="true"
+      [doughnut]="false"
+      [explodeSlices]="false"
+      [gradient]="false"
+      [tooltipDisabled]="false"
+      [animations]="true"
+      [legend]="false"
+      [view]="view"
+      (select)="onCountrySelect($event)"
+    >
+      <ng-template #tooltipTemplate let-model="model">
+        <div class="custom-tooltip">
+          <div class="tooltip-content">
+            <span>{{ model.name }}</span>
+            <br>
+            <span> <i class="fa-solid fa-medal"></i> {{ model.value }}</span>
+          </div>
+        </div>
+      </ng-template>
+    </ngx-charts-pie-chart>
   </div>
 } @else {
-    <div>
-        <app-loader></app-loader>
-    </div>
+  <div>
+    <app-loader></app-loader>
+  </div>
 }

@@ -4,10 +4,27 @@
   justify-content: center;
   margin-bottom: 1em;
 }
+
 .infos {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 2em;
+}
+
+.graph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
+
+.custom-tooltip {
+  background-color: var(--main-color);
+  padding: 10px;
+
+  & span {
+    text-align: center;
+  }
 }
