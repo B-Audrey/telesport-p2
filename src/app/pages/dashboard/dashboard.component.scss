@@ -20,14 +20,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
+  height: auto;
 }
 
 .custom-tooltip {
-  background-color: var(--main-color);
   padding: 10px;
 
   & span {
     text-align: center;
   }
+}
+
+//Need to force tooltip colors
+::ng-deep .ngx-charts-tooltip-content {
+  background-color: var(--main-color) !important;
+}
+
+::ng-deep .tooltip-caret.position-top {
+  border-top: 7px solid var(--main-color) !important;
 }

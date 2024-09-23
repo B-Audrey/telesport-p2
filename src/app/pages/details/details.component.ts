@@ -3,7 +3,7 @@ import { NumberBlocComponent } from '../../shared/components/number-bloc/number-
 import { TitleComponent } from '../../shared/components/title/title.component';
 import { OlympicService } from '../../shared/services/olympic.service';
 import { AsyncPipe } from '@angular/common';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { OlympicCountry } from '../../shared/models/Olympic';
 import { catchError, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -43,10 +43,10 @@ export class DetailsComponent implements OnInit {
   }
 
   updateViewSize() {
-    const width = window.innerWidth;
+    const width = window.innerWidth * 0.9;
     const height = window.innerHeight * 0.3;
-    console.log(width)
-    console.log(height)
+    console.log(width);
+    console.log(height);
     this.view = [width, height];
   }
 

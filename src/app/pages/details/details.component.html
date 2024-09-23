@@ -1,15 +1,13 @@
 <div class="go-back-icon" routerLink="/dashboard">
-
-<i class="fa-solid fa-rotate-left"></i>
+  <i class="fa-solid fa-rotate-left"></i>
 </div>
 
-
-@if(isLoading()) {
+@if (isLoading()) {
   <app-loader></app-loader>
 }
 
-@if(errorMessage.length > 1) {
-  <div>{{errorMessage}}</div>
+@if (errorMessage.length > 1) {
+  <div>{{ errorMessage }}</div>
 }
 
 @if (olympic) {
@@ -19,7 +17,9 @@
   <div class="infos">
     <app-number-bloc
       text="Number of entries"
-      [number]="olympic ? olympic.participations.length.toString() : 'non-défini'"></app-number-bloc>
+      [number]="
+        olympic ? olympic.participations.length.toString() : 'non-défini'
+      "></app-number-bloc>
     <app-number-bloc text="Total number medals" [number]="totalMedals.toString()"></app-number-bloc>
     <app-number-bloc
       text="Total number of Athletes"
@@ -36,7 +36,6 @@
       [yAxis]="true"
       [xAxisLabel]="'Dates'"
       [showXAxisLabel]="true"
-      [showYAxisLabel]="true"
       [animations]="true"
       [results]="lineChartData">
     </ngx-charts-line-chart>

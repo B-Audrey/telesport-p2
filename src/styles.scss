@@ -8,16 +8,19 @@
 }
 body {
   margin: auto;
-  width:90%;
-  @media(min-width: 768px) {
-    width: unset;
+  padding: 0 10px;
+  @media (min-width: 768px) {
+    padding: 0;
   }
 }
 
-p, span, a, li {
-  font-size : 0.8em;
+p,
+span,
+a,
+li {
+  font-size: 0.8em;
   @media (min-width: 768px) {
-    font-size : 1em;
+    font-size: 1em;
   }
 }
 

@@ -12,9 +12,7 @@
   </div>
   <div class="infos">
     <app-number-bloc text="Number of JOs" number="10"></app-number-bloc>
-    <app-number-bloc
-      text="Number of countries"
-      [number]="olympics.length.toString()">
+    <app-number-bloc text="Number of countries" [number]="olympics.length.toString()">
     </app-number-bloc>
   </div>
   <div class="graph">
@@ -27,13 +25,12 @@
       [animations]="true"
       [legend]="false"
       [view]="view"
-      (select)="onCountrySelect($event)"
-    >
+      (select)="onCountrySelect($event)">
       <ng-template #tooltipTemplate let-model="model">
         <div class="custom-tooltip">
           <div class="tooltip-content">
             <span>{{ model.name }}</span>
-            <br>
+            <br />
             <span> <i class="fa-solid fa-medal"></i> {{ model.value }}</span>
           </div>
         </div>
