@@ -1,5 +1,6 @@
 :root {
   --main-color: #028b8f;
+  --warn-color: #dd9818;
   --dark-grey: #717171;
 }
 * {
@@ -26,4 +27,15 @@ li {
 
 h1 {
   font-size: 2em;
+  text-align: center;
+}
+
+h2 {
+  color: var(--main-color);
+}
+
+.error-message {
+  color: var(--warn-color);
+  text-align: center;
+  font-weight: bold;
 }

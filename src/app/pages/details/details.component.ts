@@ -5,7 +5,7 @@ import { OlympicService } from '../../shared/services/olympic.service';
 import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { OlympicCountry } from '../../shared/models/Olympic';
-import { catchError, of } from 'rxjs';
+import { catchError, EMPTY } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
 import { LineChartModule } from '@swimlane/ngx-charts';
@@ -45,8 +45,6 @@ export class DetailsComponent implements OnInit {
   updateViewSize() {
     const width = window.innerWidth * 0.9;
     const height = window.innerHeight * 0.3;
-    console.log(width);
-    console.log(height);
     this.view = [width, height];
   }
 
@@ -57,35 +55,46 @@ export class DetailsComponent implements OnInit {
         .getOneOlympicCountry$(this.route.snapshot.params['id'])
         .pipe(
           takeUntilDestroyed(this.destroyRef),
-          catchError((err: HttpErrorResponse) => {
+          catchError((error: HttpErrorResponse) => {
+            if (error.status === 404) {
+              this.errorMessage = 'Data is unavailable';
+            } else if (error.status === 500) {
+              this.errorMessage = 'Server Error';
+            } else {
+              this.errorMessage = error.message;
+            }
             this.isLoading.set(false);
-            this.errorMessage = err.message;
-            return of(null);
+            return EMPTY;
           }),
         )
-        .subscribe(data => {
-          if (data) {
-            this.olympic = data;
-            this.totalMedals = data.participations.reduce(
-              (acc, current) => acc + (current.medalsCount || 0),
-              0,
-            );
-            this.totalAthletes = data.participations.reduce(
-              (acc, current) => acc + (current.athleteCount || 0),
-              0,
-            );
-
-            this.lineChartData = [
-              {
-                name: this.olympic.country,
-                series: data.participations.map(participation => ({
-                  name: participation.year.toString(),
-                  value: participation.medalsCount,
-                })),
-              },
-            ];
-          }
-          this.isLoading.set(false);
+        .subscribe({
+          next: data => {
+            if (data?.id) {
+              this.olympic = data;
+              this.totalMedals = data.participations.reduce(
+                (acc, current) => acc + (current.medalsCount || 0),
+                0,
+              );
+              this.totalAthletes = data.participations.reduce(
+                (acc, current) => acc + (current.athleteCount || 0),
+                0,
+              );
+              this.lineChartData = [
+                {
+                  name: this.olympic.country,
+                  series: data.participations.map(participation => ({
+                    name: participation.year.toString(),
+                    value: participation.medalsCount,
+                  })),
+                },
+              ];
+            } else {
+              this.errorMessage = 'Aucune donnée trouvée';
+            }
+          },
+          complete: () => {
+            this.isLoading.set(false);
+          },
         });
       this.updateViewSize();
     }

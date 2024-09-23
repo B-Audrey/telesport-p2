@@ -43,7 +43,13 @@ export class DashboardComponent implements OnInit {
   olympicData$ = this.olympicService.getOlympics().pipe(
     catchError((error: HttpErrorResponse) => {
       this.isLoading.set(false);
-      this.errorMessage = error.message;
+      if (error.status === 404) {
+        this.errorMessage = 'Data is unavailable';
+      } else if (error.status === 500) {
+        this.errorMessage = 'Server Error';
+      } else {
+        this.errorMessage = error.message;
+      }
       return of([]);
     }),
     tap((data: OlympicCountry[]) => {

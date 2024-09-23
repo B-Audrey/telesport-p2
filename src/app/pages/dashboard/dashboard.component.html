@@ -3,7 +3,7 @@
 }
 
 @if (errorMessage.length > 1) {
-  <div>{{ errorMessage }}</div>
+  <div class="error-message">{{ errorMessage }}</div>
 }
 
 @if (olympicData$ | async; as olympics) {
