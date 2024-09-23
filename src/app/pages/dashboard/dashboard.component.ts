@@ -4,7 +4,7 @@ import { OlympicService } from '../../shared/services/olympic.service';
 import { NumberBlocComponent } from '../../shared/components/number-bloc/number-bloc.component';
 import { TitleComponent } from '../../shared/components/title/title.component';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
-import { catchError, finalize, map, of } from 'rxjs';
+import { catchError, finalize, map, of, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { OlympicCountry } from '../../shared/models/Olympic';
 import { LineChartModule, PieChartModule } from '@swimlane/ngx-charts';
@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit {
   errorMessage: string = '';
   view: [number, number] = [700, 400];
   countryIdMap = new Map<string, string>(); // name - id
+  numberOfJos: string[] = [];
   isLoading = signal(true);
 
   @HostListener('window:resize', ['$event'])
@@ -44,6 +45,10 @@ export class DashboardComponent implements OnInit {
       this.isLoading.set(false);
       this.errorMessage = error.message;
       return of([]);
+    }),
+    tap((data: OlympicCountry[]) => {
+      const participations = data.flatMap(country => country.participations);
+      this.numberOfJos = Array.from(new Set(participations.map(participation => participation.id)));
     }),
     map((data: OlympicCountry[]) => {
       return data.map(country => {

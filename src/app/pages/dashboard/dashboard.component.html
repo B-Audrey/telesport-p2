@@ -11,7 +11,9 @@
     <app-title title="Medals per Country"></app-title>
   </div>
   <div class="infos">
-    <app-number-bloc text="Number of JOs" number="10"></app-number-bloc>
+    <app-number-bloc
+      text="Number of JOs"
+      [number]="numberOfJos.length.toString()"></app-number-bloc>
     <app-number-bloc text="Number of countries" [number]="olympics.length.toString()">
     </app-number-bloc>
   </div>
